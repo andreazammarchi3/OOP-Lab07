@@ -49,16 +49,13 @@ public class SportSocialNetworkUserImpl<U extends User> extends SocialNetworkUse
      */
     public static final Sport BIKE;
 
-    /*
-     * Initialize properly these sports
-     */
     static {
-        SOCCER = null;
-        F1 = null;
-        MOTOGP = null;
-        VOLLEY = null;
-        BASKET = null;
-        BIKE = null;
+        SOCCER = new Sport("Soccer");
+        F1 = new Sport("F1");
+        MOTOGP = new Sport("MotoGP");
+        VOLLEY = new Sport("Volley");
+        BASKET = new Sport("Basket");
+        BIKE = new Sport("Bike");
     }
 
     /**
@@ -99,12 +96,6 @@ public class SportSocialNetworkUserImpl<U extends User> extends SocialNetworkUse
         this.sports = new HashSet<>();
     }
 
-    /*
-     * [METHODS]
-     * 
-     * Implements all the methods below
-     */
-
     /**
      * Add a new sport followed by this user: if the user already likes or does
      * the sport, nothing happens.
@@ -114,7 +105,9 @@ public class SportSocialNetworkUserImpl<U extends User> extends SocialNetworkUse
      */
     // TODO
     public void addSport(final Sport sport) {
-
+    	if(!sports.contains(sport)) {
+    		sports.add(sport);
+    	}
     }
 
     /**
@@ -126,25 +119,23 @@ public class SportSocialNetworkUserImpl<U extends User> extends SocialNetworkUse
      */
     // TODO
     public boolean hasSport(final Sport s) {
-        return false;
+        return sports.contains(s);
     }
 
-    /*
-     * TODO
-     * 
-     * Complete the definition of this static inner class defining a Sport along
-     * with its bare name.
-     */
     public static final class Sport {
-        /*
-         * TODO
-         * 
-         * Redefine equals so that two sports are equal only if they feature the
-         * very same name. Remember that you must also redefine hashCode()!
-         */
-        @Override
-        public boolean equals(final Object o) {
-            return false;
+    	
+    	private final String name;
+    	
+    	public Sport(final String name) {
+    		this.name = name;
+    	}
+    	
+    	public String getName() {
+    		return this.name;
+    	}
+    	
+        public boolean equals(final Sport sport) {
+            return this.name == sport.getName();
         }
     }
 }
